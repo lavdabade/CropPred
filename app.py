@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import os
 
-port = int(os.environ.get('PORT', 5000))
+port = int(os.environ.get('PORT', 8000))
 app = Flask(__name__)
 app.run(host='0.0.0.0', port=port, debug=True)
 
