@@ -3,10 +3,11 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+import os
 
+port = int(os.environ.get('PORT', 5000))
 app = Flask(__name__)
-if __name__ == "__main__":
-    app.run(debug=True)
+app.run(host='0.0.0.0', port=port, debug=True)
 
 data = pd.read_csv('data/weather-cleaned-data.csv')
 X = data.drop('label',axis=1)
