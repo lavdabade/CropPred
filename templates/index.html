@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>PredCrop</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" href="../static/assets/img/smalllogo.svg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../static/assets/css/main.css">
+    <script>
+
+        // var data =
+        const labelstemp = [
+          'Reading 1',
+          'Reading 2',
+          'Reading 3',
+          'Reading 4',
+          'Reading 5',
+          'Reading 6',
+          'Reading 7'
+        ];
+        const datatemp = {
+          labels: labelstemp,
+          datasets: [{
+            label: 'Temprature variation',
+            backgroundColor: 'rgb(51, 166, 82)',
+            borderColor: 'rgb(51, 166, 82)',
+            data: [0, 10, 5, 2, 20, 30, 45],
+          }]
+        };
+        const configtemp = {
+          type: 'line',
+          data: datatemp,
+          options: {}
+        };    
+    </script>
+    <script>
+        const labelsHumidity = [
+          'Reading 1',
+          'Reading 2',
+          'Reading 3',
+          'Reading 4',
+          'Reading 5',
+          'Reading 6',
+          'Reading 7'
+        ];
+        const dataHumidity = {
+          labels: labelsHumidity,
+          datasets: [{
+            label: 'humidity variation',
+            backgroundColor: 'rgb(51, 166, 82)',
+            borderColor: 'rgb(51, 166, 82)',
+            data: [0, 4, 2, 2, 10, 20, 35],
+          }]
+        };
+        const configHumidity = {
+          type: 'line',
+          data: dataHumidity,
+          options: {}
+        };    
+    </script>
+    <script type="text/javascript">
+        var citiesByState = {
+            ANDAMAN_And_NICOBAR_ISLANDS: ['NICOBAR', 'SOUTH ANDAMAN', 'N & M ANDAMAN'],
+            ARUNACHAL_PRADESH :['LOHIT', 'EAST SIANG', 'SUBANSIRI F.D', 'TIRAP', 'ANJAW (LOHIT)', 'LOWER DIBANG', 'CHANGLANG', 'PAPUM PARE', 'LOW SUBANSIRI', 'UPPER SIANG', 'WEST SIANG', 'DIBANG VALLEY', 'WEST KAMENG', 'EAST KAMENG', 'TAWANG(W KAME', 'KURUNG KUMEY'],
+            ASSAM : ['CACHAR', 'DARRANG', 'GOALPARA', 'KAMRUP', 'LAKHIMPUR', 'NORTH CACHAR', 'NAGAON', 'SIVASAGAR', 'BARPETA', 'DHUBRI', 'DIBRUGARH', 'JORHAT', 'KARIMGANJ', 'KOKRAJHAR', 'SHONITPUR', 'GOLAGHAT', 'TINSUKIA', 'HAILAKANDI', 'DHEMAJI(LAKHI', 'KARBI ANGLONG', 'UDALGURI(DARA', 'KAMRUP METROP', 'CHIRANG(BONGAI', 'BAKSA BARPETA', 'BONGAIGAON', 'MORIGAON', 'NALBARI'],
+            MEGHALAYA :['EAST KHASI HI', 'JAINTIA HILLS', 'EAST GARO HIL', 'RI-BHOI', 'SOUTH GARO HI', 'W KHASI HILL', 'WEST GARO HIL'],
+            MANIPUR : ['IMPHAL EAST', 'SENAPATI', 'TAMENGLONG', 'CHANDEL', 'UKHRUL', 'THOUBAL', 'BISHNUPUR', 'IMPHAL WEST', 'CHURACHANDPUR'],
+            MIZORAM : ['AIZAWL', 'CHAMPHAI', 'KOLASIB', 'LUNGLEI', 'CHHIMTUIPUI', 'LAWNGTLAI', 'MAMIT', 'SAIHA', 'SERCHHIP'],
+            NAGALAND : ['KOHIMA', 'TUENSANG', 'MOKOKCHUNG', 'DIMAPUR', 'WOKHA', 'MON', 'ZUNHEBOTO', 'PHEK', 'KEPHRIE', 'LONGLENG', 'PEREN'],
+            TRIPURA :['NORTH TRIPURA', 'SOUTH TRIPURA', 'WEST TRIPURA', 'DHALAI'],
+            WEST_BENGAL : ['COOCH BEHAR', 'DARJEELING', 'JALPAIGURI', 'MALDA', 'SOUTH DINAJPUR', 'NORTH DINAJPUR', 'BANKURA', 'BIRBHUM', 'BURDWAN', 'HOOGHLY', 'HOWRAH', 'PURULIA', 'MURSHIDABAD', 'NADIA', 'NORTH 24 PARG', 'SOUTH 24 PARG', 'EAST MIDNAPOR', 'WEST MIDNAPOR', 'KOLKATA'],
+            SIKKIM : ['NORTH SIKKIM', 'EAST SIKKIM', 'WEST SIKKIM', 'SOUTH SIKKIM'],
+            ORISSA :['BALASORE', 'BOLANGIR', 'KANDHAMAL/PHU', 'CUTTACK', 'DHENKANAL', 'GANJAM', 'KALAHANDI', 'KEONDJHARGARH', 'KORAPUT', 'MAYURBHANJ', 'PURI', 'SAMBALPUR', 'SUNDARGARH', 'BHADRAK', 'JAJPUR', 'KENDRAPARA', 'ANGUL', 'NAWAPARA', 'MALKANGIRI', 'NAWARANGPUR', 'NAYAGARH', 'KHURDA', 'BARGARH', 'JHARSUGUDA', 'DEOGARH', 'RAYAGADA', 'GAJAPATI', 'JAGATSINGHAPU', 'BOUDHGARH', 'SONEPUR'],
+            JHARKHAND :['BOKARO', 'DHANBAD', 'DUMKA', 'HAZARIBAG', 'PALAMU', 'RANCHI', 'SAHIBGANJ', 'WEST SINGHBHUM', 'DEOGHAR', 'GIRIDIH', 'GODDA', 'GUMLA', 'LOHARDAGA', 'CHATRA', 'KODERMA', 'PAKUR', 'EAST SINGHBHU', 'GARHWA', 'SERAIKELA-KHA', 'JAMTARA', 'LATEHAR', 'SIMDEGA', 'KHUNTI(RANCHI', 'RAMGARH'],
+            BIHAR :['BHAGALPUR', 'EAST CHAMPARAN', 'DARBHANGA', 'GAYA', 'MUNGER', 'MUZAFFARPUR', 'WEST CHAMPARAN', 'PURNEA', 'GOPALGANJ', 'MADHUBANI', 'AURANGABAD', 'BEGUSARAI', 'BHOJPUR', 'NALANDA', 'PATNA', 'KATIHAR', 'KHAGARIA', 'SARAN', 'MADHEPURA', 'NAWADA', 'ROHTAS', 'SAMASTIPUR', 'SITAMARHI', 'SIWAN', 'VAISHALI', 'JAHANABAD', 'BUXAR', 'ARARIA', 'BANKA', 'BHABUA', 'JAMUI', 'KISHANGANJ', 'SHEIKHPURA', 'SUPAUL', 'LAKHISARAI', 'SHEOHAR', 'ARWAL', 'SAHARSA'],
+            UTTAR_PRADESH : ['ALLAHABAD', 'AZAMGARH', 'BAHRAICH', 'BALLIA', 'BANDA', 'BARABANKI', 'BASTI', 'DEORIA', 'FAIZABAD', 'FARRUKHABAD', 'FATEHPUR', 'GHAZIPUR', 'GONDA', 'GORAKHPUR', 'HARDOI', 'JAUNPUR', 'KANPUR NAGAR', 'KHERI LAKHIMP', 'LUCKNOW', 'MIRZAPUR', 'PRATAPGARH', 'RAE BARELI', 'SITAPUR', 'SULTANPUR', 'UNNAO', 'VARANASI', 'SONBHADRA', 'MAHARAJGANJ', 'MAU', 'SIDDHARTH NGR', 'KUSHINAGAR', 'AMBEDKAR NAGAR', 'KANNAUJ', 'BALRAMPUR', 'KAUSHAMBI', 'SAHUJI MAHARA', 'KANPUR DEHAT', 'CHANDAULI', 'SANT KABIR NGR', 'SANT RAVIDAS', 'SHRAVASTI NGR', 'AGRA', 'ALIGARH', 'BAREILLY', 'BIJNOR', 'BADAUN', 'BULANDSHAHAR', 'ETAH', 'ETAWAH', 'HAMIRPUR', 'JALAUN', 'JHANSI', 'LALITPUR', 'MAINPURI', 'MATHURA', 'MEERUT', 'MORADABAD', 'MUZAFFARNAGAR', 'PILIBHIT', 'RAMPUR', 'SAHARANPUR', 'SHAHJAHANPUR', 'GHAZIABAD', 'FIROZABAD', 'MAHOBA', 'MAHAMAYA', 
+            'NAGA', 'AURAIYA', 'BAGPAT', 'JYOTIBA PHULE', 'GAUTAM BUDDHA', 'KANSHIRAM NAG'],
+            UTTARANCHAL :['ALMORA', 'CHAMOLI', 'DEHRADUN', 'GARHWAL PAURI', 'NAINITAL', 'PITHORAGARH', 'GARHWAL TEHRI', 'UTTARKASHI', 'HARIDWAR', 'CHAMPAWAT', 'RUDRAPRAYAG', 'UDHAM SINGH N', 'BAGESHWAR'],
+            HARYANA :['AMBALA', 'GURGAON', 'HISAR', 'JIND', 'KARNAL', 'MAHENDRAGARH', 'ROHTAK', 'BHIWANI', 'FARIDABAD', 'KURUKSHETRA', 'SIRSA', 'SONEPAT(RTK)', 'YAMUNANAGAR', 'KAITHAL', 'PANIPAT', 'REWARI', 'FATEHABAD', 'JHAJJAR', 'PANCHKULA', 'MEWAT', 'PALWAL(FRD)'],
+            CHANDIGARH : ['CHANDIGARH'],
+            DELHI : ['NEW DELHI', 'CENTRAL DELHI', 'EAST DELHI', 'NORTH DELHI', 'NE DELHI', 'SW DELHI', 'NW DELHI', 'SOUTH DELHI', 'WEST DELHI'],
+            PUNJAB:  ['AMRITSAR', 'BATHINDA', 'FEROZEPUR', 'GURDASPUR', 'HOSHIARPUR', 'JALANDHAR', 'KAPURTHALA', 'LUDHIANA', 'PATIALA', 'RUPNAGAR', 'SANGRUR', 'FARIDKOT', 'MOGA', 'NAWANSHAHR', 'FATEHGARH SAH', 'MUKTSAR', 'MANSA', 'BARNALA', 'SAS NAGAR(MGA)', 'TARN TARAN'],
+            HIMACHAL : ['BILASPUR', 'CHAMBA', 'KANGRA', 'KINNAUR', 'KULLU', 'LAHUL & SPITI', 'MANDI', 'HAMIRPUR', 'SHIMLA', 'SIRMAUR', 'SOLAN', 'UNA']   ,
+            JAMMU_AND_KASHMIR : ['ANANTNAG', 'BARAMULLA', 'DODA', 'JAMMU', 'KATHUA', 'LADAKH (LEH)', 'UDHAMPUR', 'BADGAM', 'KUPWARA', 'PULWAMA', 'SRINAGAR', 'KARGIL', 'POONCH', 'RAJOURI', 'BANDIPORE', 'GANDERWAL', 'KULGAM/(ANT)', 'SHOPAN', 'SAMBA', 'KISTWAR', 'REASI', 'RAMBAN(DDA)'],
+            RAJASTHAN :['BARMER', 'BIKANER', 'CHURU', 'SRI GANGANAGA', 'JAISALMER', 'JALORE', 'JODHPUR', 'NAGAUR', 'PALI', 'HANUMANGARH', 'AJMER', 'ALWAR', 'BANSWARA', 'BHARATPUR', 'BHILWARA', 'BUNDI', 'CHITTORGARH', 'DUNGARPUR', 'JAIPUR', 'JHALAWAR', 'JHUNJHUNU', 'KOTA', 'SAWAI MADHOPUR', 
+            'SIKAR', 'SIROHI', 'TONK', 'UDAIPUR', 'DHOLPUR', 'BARAN', 'DAUSA', 'RAJSAMAND', 'KARAULI', 'PRATAPGARH(CHT'],
+            MADHYA_PRADESH: ['BETUL', 'VIDISHA', 'BHIND', 'DATIA', 'DEWAS', 'DHAR', 'GUNA', 'GWALIOR', 'HOSHANGABAD', 'INDORE', 'JHABUA', 'MANDSAUR', 'MORENA', 'KHANDWA', 'KHARGONE', 'RAISEN', 'RAJGARH', 'RATLAM', 'SEHORE', 'SHAJAPUR', 'SHIVPURI', 'UJJAIN', 'BHOPAL', 'HARDA', 'NEEMUCH', 'SHEOPUR', 'BARWANI', 'ASHOKNAGAR(GNA', 'BURHANPUR', 'ALIRAJPUR(JBA)', 'BALAGHAT', 'CHHATARPUR', 'CHHINDWARA', 'JABALPUR', 'MANDLA', 'NARSINGHPUR', 'PANNA', 'REWA', 'SAGAR', 'SATNA', 'SEONI', 'SHAHDOL', 'SIDHI', 'TIKAMGARH', 'KATNI', 'DINDORI', 'UMARIA', 'DAMOH', 'ANUPPUR(SHAHD', 
+            'SINGRAULI'],
+            GUJARAT : ['AHMEDABAD', 'BANASKANTHA', 'BARODA', 'BHARUCH', 'VALSAD', 'DANGS', 'KHEDA', 'MEHSANA', 'PANCHMAHALS', 'SABARKANTHA', 'SURAT', 'GANDHINAGAR', 'NARMADA(BRC)', 'NAVSARI(VSD)', 'ANAND(KHR)', 'PATAN(MHSN)', 'DAHOD(PNML)', 'TAPI(SRT)', 'AMRELI', 'BHAVNAGAR', 'JAMNAGAR', 'JUNAGADH', 'KUTCH', 'RAJKOT', 'SURENDRANAGAR', 'PORBANDAR'],
+            DADAR_NAGAR_HAVELI : ['DNH'],
+            DAMAN_AND_DUI : ['DAMAN', 'DIU'],
+            MAHARASHTRA :['MUMBAI CITY', 'RAIGAD', 'RATNAGIRI', 'THANE', 'SINDHUDURG', 'MUMBAI SUB', 'AHMEDNAGAR', 'DHULE', 'JALGAON', 'KOLHAPUR', 'NASHIK', 'PUNE', 'SANGLI', 'SATARA', 'SOLAPUR', 'NANDURBAR', 'AURANGABAD', 'BEED', 'NANDED', 'OSMANABAD', 'PARBHANI', 'LATUR', 'JALNA', 'HINGOLI', 'AKOLA', 'AMRAVATI', 'BHANDARA', 'BULDHANA', 'CHANDRAPUR', 'NAGPUR', 'YAVATMAL', 'WARDHA', 'GADCHIROLI', 'WASHIM', 'GONDIA'],
+            GOA : ['NORTH GOA', 'SOUTH GOA'],
+            CHATISGARH : ['BASTAR', 'BILASPUR', 'DURG', 'RAIGARH', 'RAIPUR', 'SURGUJA', 'RAJNANDGAON', 'DANTEWADA', 'KANKER (NORH', 'JANJGIR-CHAMP', 'KORBA', 'JASHPUR', 'DHAMTARI', 'MAHASAMUND', 'KORIYA', 'KOWARDHA (KAB', 'NARAYANPUR', 'BIJAPUR'],
+            ANDHRA_PRADESH :['EAST GODAVARI', 'WEST GODAVARI', 'GUNTUR', 'KRISHNA', 'NELLORE', 'PRAKASAM', 'SRIKAKULAM', 'VISAKHAPATNAM', 'VIZIANAGARAM', 'ADILABAD', 'HYDERABAD', 'KARIMNAGAR', 'KHAMMAM', 'MAHABUBNAGAR', 'MEDAK', 'NALGONDA', 'NIZAMABAD', 'WARANGAL', 'RANGAREDDY', 'ANANTAPUR', 'CHITTOOR', 'KUDDAPAH', 'KURNOOL'],
+            TAMIL_NADU : ['VELLORE', 'COIMBATORE', 'DHARMAPURI', 'KANYAKUMARI', 'CHENNAI', 'MADURAI', 'NILGIRIS', 'RAMANATHAPURA', 'SALEM', 'THANJAVUR', 
+            'TIRUCHIRAPPAL', 'TIRUNELVELI', 'ERODE', 'PUDUKKOTTAI', 'DINDIGUL', 'VIRUDHUNAGAR', 'SIVAGANGA', 'THOOTHUKUDI', 'TIRUVANNAMALA', 'NAGAPATTINAM', 'VILUPPURAM', 'CUDDALORE', 'KANCHIPURAM', 'TIRUVALLUR', 'THENI', 'NAMAKKAL', 'KARUR', 'PERAMBALUR', 'TIRUVARUR', 'KRISHNAGIRI', 'ARIYALUR', 'TIRUPUR'],
+            PONDICHERRY : ['PONDICHERRY', 'KARAIKAL', 'MAHE', 'YANAM'],
+            KARNATAKA : ['UTTAR KANNADA', 'DAKSHIN KANDA', 'UDUPI', 'BELGAM', 'BIDAR', 'BIJAPUR', 'DHARWAD', 'GULBARGA', 'YADGIR', 'RAICHUR', 'BAGALKOTE', 'GADAG', 'HAVERI', 'KOPPAL', 'BANGALORE RUR', 'BELLARY', 'CHIKMAGALUR', 'CHITRADURGA', 'KODAGU', 'HASSAN', 'KOLAR', 'MANDYA', 'MYSORE', 'SHIMOGA', 'TUMKUR', 'BANGALORE URB', 'CHAMARAJANAGA', 'DAVANGERE', 'RAMNAGAR(BNGR)', 'CHICKBALLAPUR'],
+            KERALA : ['ALAPPUZHA', 'CANNUR', 'ERNAKULAM', 'KOTTAYAM', 'KOZHIKODE', 'MALAPPURAM', 'PALAKKAD', 'KOLLAM', 'THRISSUR', 'THIRUVANANTHA', 'IDUKKI', 'KASARGOD', 'PATHANAMTHITTA', 'WAYANAD'],
+            LAKSHADWEEP : ['LAKSHADWEEP']
+
+        }
+        function makeSubmenu(value) {
+        if(value.length==0) document.getElementById("citySelect").innerHTML = "<option></option>";
+        else {
+        var citiesOptions = "";
+        for(cityId in citiesByState[value]) {
+        citiesOptions+="<option>"+citiesByState[value][cityId]+"</option>";
+        }
+        document.getElementById("citySelect").innerHTML = citiesOptions;
+        }
+        }
+        function displaySelected() { var country = document.getElementById("countrySelect").value;
+        var city = document.getElementById("citySelect").value;
+        alert(country+"\n"+city);
+        }
+        function resetSelection() {
+        document.getElementById("countrySelect").selectedIndex = 0;
+        document.getElementById("citySelect").selectedIndex = 0;
+        }
+
+        function showDiv(value){
+        if(value=='Other'){
+            document.getElementById('hidden_div').style.display = "block";
+        } else{
+            document.getElementById('hidden_div').style.display = "none";
+        }
+        } 
+        </script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav class="header__nav w-120">
+                <div class="header__logo">
+                    <img src="{{url_for('static',filename='assets/img/logo.svg')}}" alt="Logo">
+                </div>
+               
+
+                <div class="hamburger-menu-wrap">
+                    <div class="hamburger-menu">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero w-120">
+            <div class="hero__content">
+                <div class="hero__text">
+                    <h1 class="hero__title">An Innovative Way To Invest In Agriculture.</h1>
+                    <p class="hero__description">
+                        CropPred provides a way to predict crop for cultivation based on soil quality report
+                    </p>
+                    <a href="#predict" class="btn btn__hero">Predict Crop</a>
+                </div>
+                <div class="hero__img">
+                    <img src="{{url_for('static',filename='assets/img/hero.png')}}" alt="">
+                </div>
+            </div>
+        </section>
+
+        <section class="invest  w-105">
+            <div class="invest__content">
+                <div class="invest__head">
+                    <h2 class="invest__title">Soil Health</h2>
+                    <!-- <p class="invest__description">Autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur</p> -->
+                </div>
+                <div class="invest__body">
+                    <div class="invest__item">
+                        <div class="invest__item__head">
+                            <h5 class="invest__item__subtitle">TEMPERATURE GRAPH</h5>
+                        </div>
+
+                        <!-- TEMPERATURE GRAPH -->
+                        <div>
+                            <canvas id="temprature"></canvas>
+                        </div>
+                        
+                    </div>
+                    <div class="invest__item">
+                        <div class="invest__item__head">
+                            <h5 class="invest__item__subtitle">HUMIDITY GRAPH</h5>
+                        </div>
+
+                        <!-- HUMIDITY GRAPH -->
+                        <div>
+                            <canvas id="humidity"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-is-works w-120">
+            <div class="works__content">
+                <div class="works__head">
+                    <h2 class="works__title">Previous 7 Day's History</h2>
+                    <!-- <p class="works__description">
+                        Take your pick from the supply chain and participate in agribusiness projects that are backed up not only by Zou, but also by the best land, family heritage, innovation and overall superior expertise.
+                    </p> -->
+                </div>
+                <div class="works__body">
+                    <ul class="form_progressbar">
+                        <li class="progressbar__step active" data-step="1">01</li>
+                        <li class="progressbar__step" data-step="2">02</li>
+                        <li class="progressbar__step" data-step="3">03</li>
+                        <li class="progressbar__step" data-step="4">04</li>
+                        <li class="progressbar__step" data-step="5">05</li>
+                        <li class="progressbar__step" data-step="6">06</li>
+                        <li class="progressbar__step" data-step="7">07</li>
+                    </ul>
+                </div>
+                <div class="works__footer">
+                    {% for i in range(0,7)%}
+                    <div class="works__step__content first_step">
+                        <h3 class="works__step_title"> TEMPERATURE <br><br>HUMIDITY</h3>
+                        <p class="works__step_description">
+                            {{ "%.2f" | format(soil_data[i]['temperature'])}} (in Degree Celcius)<br><br>{{ "%.2f" | format(soil_data[i]['humidity'])}} (in Percentage)
+                        </p>
+                    </div>
+                    {% endfor %}
+                    <div class="works__step__content">
+                        <h3 class="works__step_title"> TEMPERATURE <br><br>HUMIDITY</h3>
+                        <p class="works__step_description">
+                            7 (in Degree Celcius)<br><br>59 (in Percentage)
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <section id ='predict' class="farm-invest w-105" style="margin-top: 50px;">
+                <h2 class="farm-invest__title">Predict your <span>Crop!</span></h2>
+                <div class="faixa">
+                    <form action="{{url_for('predict')}}" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="state">State</label>
+                                <select id="countrySelect" class="form-control" size="1"  style="font-size: 18px;" onchange="makeSubmenu(this.value);" name="state">
+                                    <option>Choose State</option>
+                                    <option >ANDAMAN_And_NICOBAR_ISLANDS</option>
+                                    <option>ARUNACHAL_PRADESH</option>
+                                    <option>ASSAM</option>
+                                    <option>MEGHALAYA</option>
+                                    <option>MANIPUR</option>
+                                    <option>MIZORAM</option>
+                                    <option>NAGALAND</option>
+                                    <option>TRIPURA</option>
+                                    <option>WEST_BENGAL</option>
+                                    <option>SIKKIM</option>
+                                    <option>ORISSA</option>
+                                    <option>JHARKHAND</option>
+                                    <option>BIHAR</option>
+                                    <option>UTTAR_PRADESH</option>
+                                    <option>UTTARANCHAL</option>
+                                    <option>HARYANA</option>
+                                    <option>CHANDIGARH</option>
+                                    <option>DELHI</option>
+                                    <option>PUNJAB</option>
+                                    <option>HIMACHAL</option>
+                                    <option>JAMMU_AND_KASHMIR</option>
+                                    <option>RAJASTHAN</option>
+                                    <option>MADHYA PRADESH</option>
+                                    <option>GUJARAT</option>
+                                    <option>DADAR_NAGAR_HAVELI</option>
+                                    <option>DAMAN_AND_DUI</option>
+                                    <option>MAHARASHTRA</option>
+                                    <option>GOA</option>
+                                    <option>CHATISGARH</option>
+                                    <option>ANDHRA_PRADESH</option>
+                                    <option>TAMIL_NADU</option>
+                                    <option>PONDICHERRY</option>
+                                    <option>KARNATAKA</option>
+                                    <option>KERALA</option>
+                                    <option>LAKSHADWEEP</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="city">City</label>
+                                <select id="citySelect" size="1" class="form-control" style="font-size: 18px;" name="city" onchange="showDiv(this.value)">
+                                    <option value="" disabled selected>Choose City</option>
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                            <!-- <input class="textbox" type="text" placeholder="Enter Your Location" name='location'/> -->
+                        <button href="url_for{{result}}" type="submit" class="btn btn__farm--invest" style="font-size: 20px;">Predict Crop</button>
+                    </form>
+                  </div>
+    
+            </section>
+        </section>
+
+        <footer class="footer">
+            <div class="footer__bottom">
+                <div class="footer__bottom__content w-105">
+                    <div class="footer__logo">
+                        <img src="{{url_for('static',filename='assets/img/logo.svg')}}" alt="Logo">
+                    </div>
+                    <p class="footer_copyright">
+                        © Copyright 2022. CropPred Capital Pvt Ltd.
+                    </p>
+                </div>
+                <img src="{{url_for('static',filename='assets/img/mountain.png')}}" alt="Mountain" class="footer_img">
+            </div>
+        </footer>
+    </div>
+    <script>
+        const myChart1 = new Chart(
+          document.getElementById('temprature'),
+          configtemp
+        );
+        const myChart2 = new Chart(
+          document.getElementById('humidity'),
+          configHumidity
+        );
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="../static/assets/js/main.js" type="module"></script>
+
+</body>
+
+</html>

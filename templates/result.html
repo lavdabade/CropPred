@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>CropPred</title>
-    <link rel="icon" type="image/png" href="assets/img/smalllogo.svg">
+    <link rel="icon" type="image/png" href="../static/assets/img/smalllogo.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="../static/assets/css/main.css">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         <header>
             <nav class="header__nav w-120">
                 <div class="header__logo">
-                    <img src="assets/img/logo.svg" alt="Logo">
+                    <img src="../static/assets/img/logo.svg" alt="Logo">
                 </div>
                
 
@@ -37,13 +37,13 @@
                 <div class="opportunities__body">
                     <div class="opportunity active" style="margin-top: 80px;margin-bottom: 80px;">
                         <h4 class="opportunity__title">RAINFALL</h4>
-                        <p class="opportunity__description">100</p>
+                        <p class="opportunity__description">{{  '%.2f' | format(rainfall)}}</p>
                     </div>
                     <div class="opportunity">
-                        <img src="assets/img/opportunites/opportunity-3.svg" alt="Icon" class="opportunity__icon">
-                        <h4 class="opportunity__title">RICE</h4>
+                        <img src="{{ url_for('static',filename=path)}}" alt="Icon" >
+                        <h4 class="opportunity__title">{{result}}</h4>
                         <p class="opportunity__description" >
-From the soil quantity report we got <b><span style="color: #66BB6A;">Rice</span></b> is suitable for your soil.</p>
+From the soil quantity report we got <b><span style="color: #66BB6A;">{{result}}</span></b> is suitable for your soil.</p>
                     </div>
                     <div class="opportunity active" style="margin-top: 80px;margin-bottom: 80px;">
                         <h4 class="opportunity__title">WEATHER
@@ -59,17 +59,17 @@ From the soil quantity report we got <b><span style="color: #66BB6A;">Rice</span
             <div class="footer__bottom">
                 <div class="footer__bottom__content w-105">
                     <div class="footer__logo">
-                        <img src="assets/img/logo.svg" alt="Logo">
+                        <img src="../static/assets/img/logo.svg" alt="Logo">
                     </div>
                     <p class="footer_copyright">
                         © Copyright 2022. CropPred Capital Pvt Ltd.
                     </p>
                 </div>
-                <img src="assets/img/mountain.png" alt="Mountain" class="footer_img">
+                <img src="../static/assets/img/mountain.png" alt="Mountain" class="footer_img">
             </div>
         </footer>
     </div>
-    <script src="assets/js/main.js" type="module"></script>
+    <script src="../static/assets/js/main.js" type="module"></script>
 
 </body>
 
