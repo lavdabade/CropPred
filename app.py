@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 import pandas as pd
+import requests 
+import json 
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from geopy.geocoders import Nominatim
 
 app = Flask(__name__)
 if __name__ == "__main__":
@@ -23,11 +24,30 @@ n_estimators= 1000).fit(X_train,Y_train)
 
 print(model.score(X_test,Y_test))
 
+
 crop = ['rice', 'wheat', 'Mung Bean', 'Tea', 'millet', 'maize', 'Lentil', 'Jute', 'Coffee', 'Cotton', 'Ground Nut', 'Peas', 'Rubber', 'Sugarcane', 'Tobacco', 'Kidney Beans', 'Moth Beans', 'Coconut', 'Black gram', 'Adzuki Beans', 'Pigeon Peas', 'Chickpea', 'banana', 'grapes', 'apple', 
 'mango', 'muskmelon', 'orange', 'papaya', 'pomegranate', 'watermelon']
 
-soil_data = [{'temperature': 20.87974371, 'humidity': 82.00274423, 'ph': 6.502985292}, {'temperature': 21.77046169, 'humidity': 80.31964408, 'ph': 7.038096361}, {'temperature': 23.00445915, 'humidity': 82.3207629, 'ph': 7.840207144}, {'temperature': 26.49109635, 'humidity': 80.15836264, 'ph': 6.980400905}, {'temperature': 20.13017482, 'humidity': 81.60487287, 'ph': 7.628472891}, {'temperature': 23.05804872, 'humidity': 83.37011772, 'ph': 7.073453503}, {'temperature': 22.70883798, 'humidity': 82.63941394, 'ph': 5.70080568}]
+KEY = 'C8KWK70N2FFC4P6H'
+HEADER = '&results=7'
 
+
+URL_T = 'https://api.thingspeak.com/channels/1657669/fields/1.json?'
+URL_H = 'https://api.thingspeak.com/channels/1657669/fields/2.json?'
+
+NEW_URL_T = URL_T + KEY + HEADER
+NEW_URL_H = URL_H + KEY + HEADER
+get_data_T = requests.get(NEW_URL_T).json()
+get_data_H = requests.get(NEW_URL_H).json()
+
+ft = get_data_T['feeds']
+fh = get_data_H['feeds']
+
+soil_data = []
+for x,y in zip(ft,fh):
+    soil_data.append({'temperature':float(x['field1']),'humidity':float(y['field2'].replace('\r\n\r\n',''))})
+
+print('Soil data ',soil_data)
 
 
 @app.route('/')
@@ -60,8 +80,4 @@ def predict():
 
     res = crop[prediction].capitalize()
     print('Resuly is ',res)
-    # print()
-    # geolocator = Nominatim(user_agent="geoapiExercises")
-    
-    # print( 'location',geolocator.geocode(f'{location[0]}, India').state)
     return render_template('result.html', result = res, path = f'assets/img/{res}.jpg', rainfall = rainfall)
