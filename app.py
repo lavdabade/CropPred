@@ -6,9 +6,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
-app = Flask(__name__)
-if __name__ == "__main__":
-    app.run(debug=True)
+app = Flask(__name__) 
+app.run(debug=True)
 
 data = pd.read_csv('data/weather-cleaned-data.csv')
 X = data.drop('label',axis=1)
