@@ -9,7 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 app = Flask(__name__) 
 app.run(debug=True)
 
-data = pd.read_csv('data/weather-cleaned-data.csv')
+data = pd.read_csv('data/weather-cleaned-data-updated.csv')
 X = data.drop('label',axis=1)
 Y = data['label']
 
