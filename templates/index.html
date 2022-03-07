@@ -241,6 +241,21 @@
                     
                 </div>
             </div> -->
+            <h1 style="text-align: center;"> Latest 7 Readings </h1>
+            <table class="table table-info table-striped" style="width:60%;margin-left:20%;">
+                <tr>
+                    <th style="text-align:center;">Sr No</th>
+                    <th style="text-align:center;">Temperature ( in degree celcius )</th>
+                    <th style="text-align:center;">Humidity(  in percentage )</th>
+                </tr>
+                {% for i in range(0,7) %}
+                <tr>
+                    <th style="text-align: center;">{{i+1}}</th>
+                    <th style="text-align:center">{{soil_data[i]['temperature']}}</th>
+                    <th style="text-align:center;">{{soil_data[i]['humidity']}}</th>
+                </tr>
+                {% endfor %}
+            </table>
 
             <section id ='predict' class="farm-invest w-105" style="margin-top: 50px;">
                 <h2 class="farm-invest__title">Predict your <span>Crop!</span></h2>
